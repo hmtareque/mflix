@@ -119,9 +119,8 @@ export default class MoviesDAO {
 
     const searchGenre = Array.isArray(genre) ? genre : genre.split(", ")
 
-    // TODO Ticket: Text and Subfield Search
     // Construct a query that will search for the chosen genre.
-    const query = {}
+    const query = { genres: { $in: searchGenre }}
     const project = {}
     const sort = DEFAULT_SORT
 
@@ -264,7 +263,8 @@ export default class MoviesDAO {
 
     // TODO Ticket: Paging
     // Use the cursor to only return the movies that belong on the current page
-    const displayCursor = cursor.limit(moviesPerPage)
+    const skip = moviesPerPage * page;
+    const displayCursor = cursor.skip(skip).limit(moviesPerPage)
 
     try {
       const moviesList = await displayCursor.toArray()
