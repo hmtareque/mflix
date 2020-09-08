@@ -198,6 +198,9 @@ export default class MoviesDAO {
     const queryPipeline = [
       matchStage,
       sortStage,
+      skipStage,
+      limitStage,
+      facetStage
       // TODO Ticket: Faceted Search
       // Add the stages to queryPipeline in the correct order.
     ]
@@ -261,7 +264,6 @@ export default class MoviesDAO {
     Paging can be implemented by using the skip() and limit() cursor methods.
     */
 
-    // TODO Ticket: Paging
     // Use the cursor to only return the movies that belong on the current page
     const skip = moviesPerPage * page;
     const displayCursor = cursor.skip(skip).limit(moviesPerPage)
