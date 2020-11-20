@@ -20,6 +20,7 @@ require("dotenv").config()
 ;(async () => {
   try {
     const host = process.env.MFLIX_DB_URI
+    console.log(process.env.MFLIX_NS)
     const client = await MongoClient.connect(host, { useNewUrlParser: true })
     const mflix = client.db(process.env.MFLIX_NS)
 

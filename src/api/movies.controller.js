@@ -28,10 +28,12 @@ export default class MoviesController {
     try {
       let id = req.params.id || {}
       let movie = await MoviesDAO.getMovieByID(id)
+
       if (!movie) {
         res.status(404).json({ error: "Not found" })
         return
       }
+
       let updated_type = movie.lastupdated instanceof Date ? "Date" : "other"
       res.json({ movie, updated_type })
     } catch (e) {
